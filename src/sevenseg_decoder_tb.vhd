@@ -65,6 +65,8 @@ begin
         -- Test input 1111, should output an F
         w_user_input <= "1111"; wait for 10ns;
             assert (w_mux_output = "0001110") report "Bad w/ all 1s" severity failure;
+        w_user_input <= "1000"; wait for 10ns;
+            assert (w_mux_output = "0000000") report "Bad w/ all 1000" severity failure;
         wait; -- wait forever lol
     end process;
     ---

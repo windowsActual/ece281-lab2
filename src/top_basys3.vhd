@@ -81,7 +81,7 @@ architecture top_basys3_arch of top_basys3 is
          o_sen_n : out STD_LOGIC_VECTOR (6 downto 0));
   end component sevenseg_decoder;
   
-  -- create wire to connect button to 7SD enable (active-low)
+  -- create wires to connect button to 7SD enable (active-low)
   signal w_button     : std_logic_vector(3 downto 0);
   signal w_user_input : std_logic_vector(3 downto 0);
   signal w_mux_output : std_logic_vector(6 downto 0);
@@ -93,8 +93,8 @@ begin
 	-----------------------------------------------------	
     sevenseg_decoder_inst : sevenseg_decoder
 	port map(
-	i_Hex => sw(3 downto 0),
-	o_sen_n => seg
+	i_Hex => sw(3 downto 0), -- Hook up four switch bit input to one-hot
+	o_sen_n => seg -- Hook up output of mux to the Basys Board segment
 	);
 	
 	
@@ -103,11 +103,10 @@ begin
 	-- display 7SD 0 only when button pushed
 	-- other 7SD are kept off
 	-----------------------------------------------------
-	w_7SD_EN_n  <= not btnC;
-
-    an(0)   <= w_7SD_EN_n;
-    an(1)   <= '1';
+	w_7SD_EN_n  <= not btnC; 
+    an(0)   <= w_7SD_EN_n; -- Set rightmost display to button
+    an(1)   <= '1';  
     an(2)   <= '1';
-    an(3)   <= '1';
+    an(3)   <= '1'; -- All other displays go hot to disable them
 		
 end top_basys3_arch;
