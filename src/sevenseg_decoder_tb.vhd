@@ -60,12 +60,12 @@ begin
     test_process : process
     begin
         -- Test input 0000, should output 0
-        w_user_input <= "0000"; wait for 10ns;
+        w_user_input <= "0000"; wait for 10 ns;
             assert (w_mux_output = "1000000") report "Bad w/ all 0s" severity failure;
         -- Test input 1111, should output an F
-        w_user_input <= "1111"; wait for 10ns;
+        w_user_input <= "1111"; wait for 10 ns;
             assert (w_mux_output = "0001110") report "Bad w/ all 1s" severity failure;
-        w_user_input <= "1000"; wait for 10ns;
+        w_user_input <= "1000"; wait for 10 ns;
             assert (w_mux_output = "0000000") report "Bad w/ all 1000" severity failure;
         wait; -- wait forever lol
     end process;
